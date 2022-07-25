@@ -55,47 +55,44 @@ ___TEMPLATE_PARAMETERS___
   {
     "type": "GROUP",
     "name": "standardParameters",
-    "displayName": "Standard Parameters",
-    "groupStyle": "ZIPPY_OPEN",
+    "displayName": "Overwrite Standard Parameters",
+    "groupStyle": "ZIPPY_CLOSED",
     "subParams": [
+      {
+        "type": "LABEL",
+        "name": "label1",
+        "displayName": "By default, it uses GA4 ecommerce fields"
+      },
       {
         "type": "TEXT",
         "name": "transactionId",
         "displayName": "Unique transaction reference",
-        "simpleValueType": true,
-        "valueValidators": [
-          {
-            "type": "NON_EMPTY",
-            "enablingConditions": []
-          }
-        ]
+        "simpleValueType": true
       },
       {
         "type": "TEXT",
         "name": "purchaseAmount",
         "displayName": "Purchase amount",
-        "simpleValueType": true,
-        "help": "If not set, it will use the value field set in GA4"
+        "simpleValueType": true
       },
       {
         "type": "TEXT",
         "name": "currency",
         "displayName": "Currency",
-        "simpleValueType": true,
-        "help": "If not set, it will use the currency field set in GA4"
+        "simpleValueType": true
+      },
+      {
+        "type": "TEXT",
+        "name": "coupon",
+        "displayName": "Coupon used",
+        "simpleValueType": true
       },
       {
         "type": "TEXT",
         "name": "payName",
-        "displayName": "Type of payment used",
+        "displayName": "Method of payment used",
         "simpleValueType": true,
-        "help": "Optional - Clear name, without space, special characters or accent. For example: \"paypal\", or \"moneytransfer\"."
-      },
-      {
-        "type": "TEXT",
-        "name": "voucher",
-        "displayName": "Voucher used",
-        "simpleValueType": true
+        "help": "Clear name, without space, special characters or accent. For example: \"paypal\", or \"moneytransfer\"."
       }
     ]
   },
@@ -195,14 +192,24 @@ switch (eventModel.event_name) {
       'mclic=' + data.customerId,
 
       'cible=' + kwankoCookie[0],
-      'argann=' + data.transactionId
+      'argann=' + data.transactionId ? data.transactionId : eventModel.transaction_id
     ];
     
     if (eventModel.event_name === PURCHASE_EVENT) {
       urlParams.push('argmon=' + encodeUri(data.purchaseAmount ? data.purchaseAmount : eventModel.value));
-      urlParams.push('nacur=' + encodeUri(data.currency ? data.currency : eventModel.currency));
+
+      urlParams.push(
+        data.currency !== undefined || eventModel.currency !== undefined ?
+          'nacur=' + encodeUri(data.currency ? data.currency : eventModel.currency) :
+          ''
+      );
+      urlParams.push(
+        data.coupon !== undefined || eventModel.coupon !== undefined ?
+          'argbr=' + encodeUri(data.voucher ? data.coupon : eventModel.coupon) :
+          ''
+      );
+
       urlParams.push(data.payName !== undefined ? 'argmodp=' + encodeUri(data.payName) : '');
-      urlParams.push(data.voucher !== undefined ? 'argbr=' + encodeUri(data.voucher) : '');
     }
 
     const urlParamsString = urlParams.filter((v) => v).join('&');
