@@ -1,0 +1,5 @@
+homepage: "https://www.addingwell.com"
+documentation: "https://github.com/addingwell/kwanko-tag/blob/master/README.md"
+versions:
+  - sha: fd95f2195980c6fcbaa25afeab10ef977bd6b692
+    changeNotes: Initial release.
