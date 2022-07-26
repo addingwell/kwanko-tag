@@ -122,6 +122,18 @@ ___TEMPLATE_PARAMETERS___
         "displayName": "Lead event name",
         "simpleValueType": true,
         "defaultValue": "generate_lead"
+      },
+      {
+        "type": "TEXT",
+        "name": "cookieExpiration",
+        "displayName": "Cookie expiration in days",
+        "simpleValueType": true,
+        "defaultValue": 30,
+        "valueValidators": [
+          {
+            "type": "POSITIVE_NUMBER"
+          }
+        ]
       }
     ]
   }
@@ -138,7 +150,6 @@ const parseUrl = require('parseUrl');
 const encodeUriComponent = require('encodeUriComponent');
 
 const eventModel = getAllEventData();
-
 
 const PAGE_VIEW_EVENT = data.pageViewEvent;
 const PURCHASE_EVENT = data.purchaseEvent;
@@ -172,7 +183,7 @@ switch (eventModel.event_name) {
         path: '/',
         secure: true,
         httpOnly: false,
-        'max-age': 86400 * 395
+        'max-age': 86400 * data.cookieExpiration
       };
       setCookie('kwk', value, options, false);
     }
