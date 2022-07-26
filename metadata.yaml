@@ -5,3 +5,5 @@ versions:
     changeNotes: Initial release.
   - sha: a553d1ae7d63bf415117b8f79c4d6363e4a93f2d
     changeNotes: Overwrite more default parameter.
+  - sha: e5cf67e5d01a391586f12665f4d66eefea549d70
+    changeNotes: Add cookieExpiration parameter
