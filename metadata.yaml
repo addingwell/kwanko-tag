@@ -1,6 +1,9 @@
 homepage: "https://www.addingwell.com"
 documentation: "https://github.com/addingwell/kwanko-tag/blob/master/README.md"
 versions:
+  - sha: e80a1562199f48705053a5f56ff65fc333c0f21c
+    changeNotes: Rename encodeUri function to be clearer on the intent
+
   - sha: e5cf67e5d01a391586f12665f4d66eefea549d70
     changeNotes: Add cookieExpiration parameter
   - sha: a553d1ae7d63bf415117b8f79c4d6363e4a93f2d
