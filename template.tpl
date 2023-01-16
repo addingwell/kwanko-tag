@@ -156,7 +156,7 @@ const PURCHASE_EVENT = data.purchaseEvent;
 const GENERATE_LEAD_EVENT = data.leadEvent;
 
 
-function encodeUri(value) {
+function safeEncodeUriComponent(value) {
   value = value || '';
   return encodeUriComponent(value);
 }
@@ -207,20 +207,20 @@ switch (eventModel.event_name) {
     ];
     
     if (eventModel.event_name === PURCHASE_EVENT) {
-      urlParams.push('argmon=' + encodeUri(data.purchaseAmount ? data.purchaseAmount : eventModel.value));
+      urlParams.push('argmon=' + safeEncodeUriComponent(data.purchaseAmount ? data.purchaseAmount : eventModel.value));
 
       urlParams.push(
         data.currency !== undefined || eventModel.currency !== undefined ?
-          'nacur=' + encodeUri(data.currency ? data.currency : eventModel.currency) :
+          'nacur=' + safeEncodeUriComponent(data.currency ? data.currency : eventModel.currency) :
           ''
       );
       urlParams.push(
         data.coupon !== undefined || eventModel.coupon !== undefined ?
-          'argbr=' + encodeUri(data.voucher ? data.coupon : eventModel.coupon) :
+          'argbr=' + safeEncodeUriComponent(data.voucher ? data.coupon : eventModel.coupon) :
           ''
       );
 
-      urlParams.push(data.payName !== undefined ? 'argmodp=' + encodeUri(data.payName) : '');
+      urlParams.push(data.payName !== undefined ? 'argmodp=' + safeEncodeUriComponent(data.payName) : '');
     }
 
     const urlParamsString = urlParams.filter((v) => v).join('&');
