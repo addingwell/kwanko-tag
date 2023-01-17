@@ -200,10 +200,10 @@ switch (eventModel.event_name) {
     }
 
     const urlParams = [
-      'mclic=' + data.customerId,
+      'mclic=' + safeEncodeUriComponent(data.customerId),
 
-      'cible=' + kwankoCookie[0],
-      'argann=' + data.transactionId ? data.transactionId : eventModel.transaction_id
+      'cible=' + safeEncodeUriComponent(kwankoCookie[0]),
+      'argann=' + safeEncodeUriComponent(data.transactionId ? data.transactionId : eventModel.transaction_id)
     ];
     
     if (eventModel.event_name === PURCHASE_EVENT) {
