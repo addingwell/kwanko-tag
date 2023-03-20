@@ -98,6 +98,33 @@ ___TEMPLATE_PARAMETERS___
   },
   {
     "type": "GROUP",
+    "name": "customParameters",
+    "displayName": "Custom Parameters",
+    "groupStyle": "ZIPPY_CLOSED",
+    "subParams": [
+      {
+        "type": "SIMPLE_TABLE",
+        "name": "customParametersTable",
+        "displayName": "",
+        "simpleTableColumns": [
+          {
+            "defaultValue": "",
+            "displayName": "ref",
+            "name": "ref",
+            "type": "TEXT"
+          },
+          {
+            "defaultValue": "",
+            "displayName": "value",
+            "name": "value",
+            "type": "TEXT"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "GROUP",
     "name": "advancedParameters",
     "displayName": "Advanced Parameters",
     "groupStyle": "ZIPPY_CLOSED",
@@ -196,7 +223,7 @@ switch (eventModel.event_name) {
 
     if (!kwankoCookie || !kwankoCookie[0]) {
       data.gtmOnSuccess();
-      break; 
+      break;
     }
 
     const urlParams = [
@@ -205,7 +232,7 @@ switch (eventModel.event_name) {
       'cible=' + safeEncodeUriComponent(kwankoCookie[0]),
       'argann=' + safeEncodeUriComponent(data.transactionId ? data.transactionId : eventModel.transaction_id)
     ];
-    
+
     if (eventModel.event_name === PURCHASE_EVENT) {
       urlParams.push('argmon=' + safeEncodeUriComponent(data.purchaseAmount ? data.purchaseAmount : eventModel.value));
 
@@ -221,6 +248,21 @@ switch (eventModel.event_name) {
       );
 
       urlParams.push(data.payName !== undefined ? 'argmodp=' + safeEncodeUriComponent(data.payName) : '');
+    }
+
+    const includedRef = [];
+    for (let key in data.customParametersTable) {
+      const row = data.customParametersTable[key];
+      if (includedRef.indexOf(row.ref) !== -1) {
+        continue;
+      }
+
+      if (row.value === undefined) {
+        continue;
+      }
+
+      includedRef.push(row.ref);
+      urlParams.push(row.ref + '=' + safeEncodeUriComponent(row.value));
     }
 
     const urlParamsString = urlParams.filter((v) => v).join('&');
