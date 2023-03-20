@@ -1,6 +1,9 @@
 homepage: "https://www.addingwell.com"
 documentation: "https://github.com/addingwell/kwanko-tag/blob/master/README.md"
 versions:
+  - sha: a475e36d79132962640a5b303ee0ba7b98d660be
+    changeNotes: Add custom parameters
+
   - sha: e8f373e98f7604b02ac7a9472ed77154bf64d105
     changeNotes: Add missing encoding on params
 
