@@ -1,15 +1,14 @@
 homepage: "https://www.addingwell.com"
 documentation: "https://github.com/addingwell/kwanko-tag/blob/master/README.md"
 versions:
+  - sha: 948853ccd2f9397177a670a239acc887f61ef685
+    changeNotes: Update custom parameters to lower case
   - sha: a475e36d79132962640a5b303ee0ba7b98d660be
     changeNotes: Add custom parameters
-
   - sha: e8f373e98f7604b02ac7a9472ed77154bf64d105
     changeNotes: Add missing encoding on params
-
   - sha: e80a1562199f48705053a5f56ff65fc333c0f21c
     changeNotes: Rename encodeUri function to be clearer on the intent
-
   - sha: e5cf67e5d01a391586f12665f4d66eefea549d70
     changeNotes: Add cookieExpiration parameter
   - sha: a553d1ae7d63bf415117b8f79c4d6363e4a93f2d
