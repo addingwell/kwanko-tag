@@ -262,7 +262,7 @@ switch (eventModel.event_name) {
       }
 
       includedRef.push(row.ref);
-      urlParams.push(row.ref + '=' + safeEncodeUriComponent(row.value));
+      urlParams.push(row.ref.toLowerCase() + '=' + safeEncodeUriComponent(row.value));
     }
 
     const urlParamsString = urlParams.filter((v) => v).join('&');
