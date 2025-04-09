@@ -243,7 +243,7 @@ switch (eventModel.event_name) {
       );
       urlParams.push(
         data.coupon !== undefined || eventModel.coupon !== undefined ?
-          'argbr=' + safeEncodeUriComponent(data.voucher ? data.coupon : eventModel.coupon) :
+          'argbr=' + safeEncodeUriComponent(data.coupon ? data.coupon : eventModel.coupon) :
           ''
       );
 
